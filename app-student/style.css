@@ -1,0 +1,586 @@
+:root {
+--primary-color: #4a7dff; /* Study Flow Blue */
+--secondary-color: #f4f7f9; /* Light background */
+--text-dark: #333;
+--text-light: #fff;
+--card-bg: #fff;
+--success-green: #28a745;
+--error-red: #dc3545;
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background-color: var(--secondary-color);
+color: var(--text-dark);
+}
+
+/* --- Onboarding Styles (Initial State) --- */
+.onboarding-container {
+display: none;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+background-color: var(--secondary-color);
+}
+
+.onboarding-container.active {
+display: flex;
+}
+
+.onboarding-form {
+background-color: var(--card-bg);
+padding: 40px;
+border-radius: 10px;
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+max-width: 400px;
+width: 90%;
+text-align: center;
+}
+
+.onboarding-form h2 {
+color: var(--primary-color);
+margin-bottom: 10px;
+}
+
+.onboarding-form p {
+color: #6c757d;
+margin-bottom: 25px;
+}
+
+.onboarding-form input,
+.onboarding-form select,
+.onboarding-form button {
+width: 100%;
+padding: 12px;
+margin-bottom: 15px;
+border: 1px solid #ddd;
+border-radius: 5px;
+box-sizing: border-box;
+font-size: 1em;
+}
+
+.onboarding-form button {
+margin-top: 10px;
+background-color: var(--primary-color);
+color: var(--text-light);
+font-weight: bold;
+cursor: pointer;
+}
+
+/* --- Layout Structure --- */
+.app-container {
+display: none;
+min-height: 100vh;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+width: 250px;
+background-color: var(--card-bg);
+box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+display: flex;
+flex-direction: column;
+padding: 20px 0;
+z-index: 1000;
+}
+
+.logo {
+font-size: 1.8em;
+font-weight: bold;
+color: var(--primary-color);
+text-align: center;
+margin-bottom: 40px;
+}
+
+.main-nav a {
+display: flex;
+align-items: center;
+padding: 15px 20px;
+color: var(--text-dark);
+text-decoration: none;
+transition: background-color 0.2s, color 0.2s;
+font-weight: 500;
+}
+
+.main-nav a i {
+margin-right: 15px;
+font-size: 1.1em;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+background-color: var(--primary-color);
+color: var(--text-light);
+border-left: 5px solid var(--secondary-color);
+}
+
+.user-info {
+margin-top: auto;
+padding: 20px;
+text-align: center;
+border-top: 1px solid #eee;
+}
+
+.user-info span {
+display: block;
+margin-bottom: 15px;
+font-weight: 600;
+}
+
+.icon-btn {
+background: none;
+border: none;
+color: var(--text-dark);
+font-size: 1.2em;
+cursor: pointer;
+}
+
+.logout-btn:hover {
+color: var(--error-red);
+}
+
+/* --- Main Content --- */
+.main-content {
+flex-grow: 1;
+padding: 30px;
+}
+
+.header {
+margin-bottom: 30px;
+}
+
+.header h2 {
+font-weight: 300;
+font-size: 1.8em;
+color: var(--primary-color);
+}
+
+/* --- View Structure and Animation --- */
+.view {
+display: none;
+animation: fadeIn 0.5s;
+}
+
+.view.active {
+display: block;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- General Card & Button Styles --- */
+.progress-card, .sprint-card, .schedule-grid, .wellness-grid, .locker-panel, .connect-panel {
+background-color: var(--card-bg);
+padding: 25px;
+border-radius: 10px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+margin-bottom: 30px;
+}
+
+.btn {
+display: inline-block;
+padding: 10px 20px;
+border-radius: 5px;
+text-decoration: none;
+font-weight: 600;
+transition: background-color 0.2s;
+cursor: pointer;
+border: none;
+}
+
+.primary-btn {
+background-color: var(--primary-color);
+color: var(--text-light);
+}
+
+.primary-btn:hover {
+background-color: #3b66d4;
+}
+
+.secondary-btn {
+background-color: #e0e0e0;
+color: var(--text-dark);
+margin-left: 10px;
+}
+
+.secondary-btn:hover {
+background-color: #ccc;
+}
+
+/* --- Planner Specific Styles --- */
+.progress-bar-container {
+height: 15px;
+background-color: #eee;
+border-radius: 8px;
+margin: 15px 0;
+overflow: hidden;
+}
+
+.progress-bar {
+height: 100%;
+background-color: var(--success-green);
+transition: width 0.5s ease-in-out;
+}
+
+.schedule-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 20px;
+text-align: center;
+}
+
+.schedule-item {
+padding: 20px;
+border-radius: 8px;
+background-color: var(--secondary-color);
+}
+
+.item-icon {
+font-size: 1.8em;
+color: var(--primary-color);
+margin-bottom: 10px;
+}
+
+.planner-action {
+margin-top: 15px;
+margin-left: 0;
+width: 100%;
+box-sizing: border-box;
+}
+
+.planner-log {
+margin-top: 20px;
+padding: 15px;
+background-color: #e6f0ff;
+border-left: 5px solid var(--primary-color);
+border-radius: 5px;
+}
+
+/* --- Sprints Specific Styles (Timer) --- */
+.sprint-card {
+text-align: center;
+max-width: 500px;
+margin: 0 auto 30px;
+}
+
+.timer-display {
+font-size: 4em;
+font-weight: bold;
+margin: 20px 0;
+color: var(--text-dark);
+}
+
+.small-text {
+margin-top: 20px;
+color: #6c757d;
+}
+
+/* Visual state for a running timer button (Pause state) */
+.running-timer {
+background-color: var(--error-red) !important;
+color: var(--text-light) !important;
+}
+
+/* --- Wellness Specific Styles --- */
+.wellness-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 20px;
+}
+
+.zen-card {
+text-align: center;
+padding: 25px;
+border: 1px solid #eee;
+border-radius: 10px;
+}
+
+.zen-icon {
+font-size: 3em;
+color: var(--success-green);
+margin-bottom: 15px;
+}
+
+/* Mood Journal */
+.mood-selector {
+width: 100%;
+padding: 10px;
+margin-bottom: 10px;
+border-radius: 5px;
+border: 1px solid #ddd;
+font-size: 1em;
+}
+
+#log-mood {
+width: 100%;
+margin-top: 5px;
+}
+
+.mood-history {
+margin-top: 15px;
+padding-top: 10px;
+border-top: 1px solid #eee;
+font-size: 0.9em;
+text-align: left;
+color: #6c757d;
+}
+
+/* SoundSpaces */
+.sound-controls {
+margin-top: 15px;
+}
+
+.sound-btn {
+margin: 5px;
+}
+
+.sound-btn.active {
+background-color: var(--success-green);
+color: var(--text-light);
+}
+
+/* Break Roulette */
+.roulette-result {
+margin-top: 15px;
+padding: 15px;
+min-height: 40px;
+background-color: var(--secondary-color);
+border-radius: 5px;
+font-weight: 600;
+}
+
+/* --- Locker Specific Styles --- */
+.locker-panel {
+max-width: 700px;
+margin: 0 auto;
+}
+
+.locker-panel h3 {
+margin-bottom: 10px;
+}
+
+.locker-panel p {
+color: #6c757d;
+margin-bottom: 25px;
+}
+
+.locker-content {
+margin-top: 20px;
+padding: 10px 0;
+border-top: 1px solid #eee;
+}
+
+.locker-item {
+background-color: var(--secondary-color);
+padding: 15px;
+border-radius: 5px;
+margin-bottom: 15px;
+}
+
+.locker-item img {
+max-width: 100%;
+height: auto;
+border-radius: 5px;
+margin-top: 10px;
+}
+
+.add-item-btn {
+margin-top: 10px;
+width: 100%;
+}
+
+/* --- Modal Styles --- */
+.modal {
+display: none;
+position: fixed;
+z-index: 2000;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+background-color: #fefefe;
+margin: 15% auto;
+padding: 30px;
+border-radius: 10px;
+border: 1px solid #888;
+width: 90%;
+max-width: 500px;
+animation: slideDown 0.3s;
+}
+
+@keyframes slideDown {
+from { opacity: 0; transform: translateY(-50px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.close-btn {
+color: #aaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+color: var(--text-dark);
+text-decoration: none;
+cursor: pointer;
+}
+
+#item-type-select, #item-text-input {
+width: 100%;
+padding: 10px;
+margin: 10px 0;
+border-radius: 5px;
+border: 1px solid #ddd;
+resize: vertical;
+}
+
+#save-locker-item {
+width: 100%;
+margin-top: 10px;
+}
+
+/* --- Student Connect Styles --- */
+.connect-panel {
+background-color: var(--card-bg);
+padding: 30px;
+border-radius: 10px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.connect-filters {
+display: flex;
+gap: 15px;
+align-items: center;
+margin-bottom: 25px;
+padding: 15px;
+border-bottom: 1px solid #eee;
+}
+
+.connect-filters label {
+font-weight: 600;
+}
+
+.connect-filters select {
+padding: 8px;
+border-radius: 5px;
+border: 1px solid #ccc;
+}
+
+.peer-list {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 20px;
+}
+
+.peer-card {
+background-color: var(--secondary-color);
+padding: 20px;
+border-radius: 8px;
+border-left: 5px solid var(--primary-color);
+}
+
+.peer-card h4 {
+margin-bottom: 5px;
+color: var(--text-dark);
+}
+
+.peer-card p {
+margin: 5px 0;
+font-size: 0.9em;
+color: #6c757d;
+}
+
+.peer-card .contact-btn {
+background-color: var(--success-green);
+color: var(--text-light);
+padding: 8px 15px;
+border: none;
+border-radius: 5px;
+margin-top: 10px;
+cursor: pointer;
+font-size: 0.9em;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+/* Main App Layout */
+.app-container {
+flex-direction: column;
+display: flex !important;
+}
+
+.sidebar {
+width: 100%;
+height: auto;
+padding: 10px 0;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+margin-bottom: 0;
+padding-left: 20px;
+}
+
+.main-nav {
+display: none;
+}
+
+.user-info {
+margin-top: 0;
+padding: 0 20px;
+border-top: none;
+}
+
+.user-info span {
+display: none;
+}
+
+.main-content {
+padding: 20px;
+}
+
+.schedule-grid, .wellness-grid {
+grid-template-columns: 1fr;
+}
+
+.sound-btn {
+width: 100%;
+margin: 5px 0;
+}
+
+/* Connect Filters */
+.connect-filters {
+flex-direction: column;
+align-items: flex-start;
+}
+
+.connect-filters select, .connect-filters button {
+width: 100%;
+margin-top: 5px;
+}
+
+/* Onboarding Form */
+.onboarding-form {
+padding: 30px;
+}
+}
+
+

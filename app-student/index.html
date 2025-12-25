@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyFlow - The Hybrid Study App</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<div id="onboarding-container" class="onboarding-container active">
+<div class="onboarding-form">
+<h2>Welcome to StudyFlow!</h2>
+<p>Please tell us a bit about yourself to personalize your study experience.</p>
+<form id="student-info-form">
+<input type="text" id="student-name" placeholder="Full Name" required>
+<input type="email" id="student-email" placeholder="Email" required>
+<select id="student-subject" required>
+<option value="" disabled selected>Primary Study Subject/Course</option>
+<option value="Physics">Physics</option>
+<option value="Biology">Biology</option>
+<option value="History">History</option>
+<option value="Computer Science">Computer Science</option>
+<option value="Mathematics">Mathematics</option>
+</select>
+<select id="student-year" required>
+<option value="" disabled selected>Current Year/Level</option>
+<option value="1">Year 1</option>
+<option value="2">Year 2</option>
+<option value="3">Year 3</option>
+<option value="4+">Year 4 or higher</option>
+</select>
+<button type="submit" class="btn primary-btn">Start Studying</button>
+</form>
+</div>
+</div>
+
+<div class="app-container" id="app-container">
+<aside class="sidebar">
+<div class="logo">StudyFlow</div>
+<nav class="main-nav">
+<a href="#planner" class="nav-link active" data-view="planner"><i class="fas fa-calendar-check"></i> Study Planner</a>
+<a href="#sprints" class="nav-link" data-view="sprints"><i class="fas fa-stopwatch"></i> Study Sprints</a>
+<a href="#wellness" class="nav-link" data-view="wellness"><i class="fas fa-leaf"></i> Zen Zone</a>
+<a href="#locker" class="nav-link" data-view="locker"><i class="fas fa-lock"></i> Data Locker</a>
+<a href="#connect" class="nav-link" data-view="connect"><i class="fas fa-comments"></i> Student Connect</a>
+</nav>
+<div class="user-info">
+<span id="welcome-user">Welcome!</span>
+<button class="icon-btn logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+</div>
+</aside>
+
+<main class="main-content">
+<header class="header">
+<h2 id="view-title">Study Planner</h2>
+</header>
+
+<section id="planner-view" class="view active">
+<div class="progress-card">
+<h3>Progress Overview (Exam 1)</h3>
+<div class="progress-bar-container">
+<div class="progress-bar" style="width: 65%;"></div>
+</div>
+<p>65% of topics mastered. Focus on **Thermodynamics** this week.</p>
+</div>
+
+<div class="schedule-grid">
+<div class="schedule-item">
+<i class="fas fa-book-open item-icon"></i>
+<h4>Monday Focus</h4>
+<p>Complete Chapter 4 Review: 150 mins</p>
+<button class="btn secondary-btn planner-action" data-action="monday">Start Task</button>
+</div>
+<div class="schedule-item">
+<i class="fas fa-users item-icon"></i>
+<h4>Tuesday Group</h4>
+<p>Meet Accountability Buddy at 7 PM</p>
+<button class="btn secondary-btn planner-action" data-action="tuesday">Join Session</button>
+</div>
+<div class="schedule-item">
+<i class="fas fa-mug-hot item-icon"></i>
+<h4>Wednesday Break</h4>
+<p>Mandatory 1-hour screen break!</p>
+<button class="btn secondary-btn planner-action" data-action="wednesday">Log Break</button>
+</div>
+</div>
+
+<div id="planner-log" class="planner-log">
+</div>
+</section>
+
+<section id="sprints-view" class="view">
+<div class="sprint-card">
+<h3>Pomodoro Study Sprints</h3>
+<p>Join a focused session to maximize concentration.</p>
+<div class="timer-display" id="timer-display">25:00</div>
+<div class="timer-controls">
+<button class="btn primary-btn" id="start-sprint">Start 25-min Sprint</button>
+<button class="btn secondary-btn" id="reset-sprint">Reset</button>
+</div>
+<p class="small-text">Current method: **Pomodoro Technique** (25 min focus / 5 min break)</p>
+</div>
+</section>
+
+<section id="wellness-view" class="view">
+<div class="wellness-grid">
+
+<div class="zen-card">
+<i class="fas fa-feather-alt zen-icon"></i>
+<h4>Mood Journal</h4>
+<p>Log your current stress level and feelings.</p>
+<select id="mood-selector" class="mood-selector">
+<option value="5">😁 Awesome</option>
+<option value="4">😊 Good</option>
+<option value="3">😐 Okay</option>
+<option value="2">😟 Stressed</option>
+<option value="1">😩 Overwhelmed</option>
+</select>
+<button class="btn primary-btn" id="log-mood">Log Mood</button>
+<div id="mood-history" class="mood-history"></div>
+</div>
+
+<div class="zen-card soundspaces-card">
+<i class="fas fa-volume-up zen-icon"></i>
+<h4>SoundSpaces</h4>
+<p>Ambient sound controls:</p>
+<div class="sound-controls">
+<button class="btn secondary-btn sound-btn" data-sound="rain"><i class="fas fa-cloud-showers-heavy"></i> Rain</button>
+<button class="btn secondary-btn sound-btn" data-sound="nature"><i class="fas fa-tree"></i> Nature</button>
+<button class="btn secondary-btn sound-btn" data-sound="lofi"><i class="fas fa-music"></i> Lo-fi</button>
+<button class="btn primary-btn sound-btn" data-sound="stop"><i class="fas fa-volume-mute"></i> Stop</button>
+</div>
+<audio id="ambient-audio" loop></audio>
+</div>
+
+<div class="zen-card break-roulette-card">
+<i class="fas fa-dice zen-icon"></i>
+<h4>Break Roulette</h4>
+<p>Get a random 5-min stress-buster!</p>
+<button class="btn primary-btn" id="spin-roulette">Spin</button>
+<div id="roulette-result" class="roulette-result"></div>
+</div>
+</div>
+</section>
+
+<section id="locker-view" class="view">
+<div class="locker-panel">
+<h3>Your Personal Digital Escape Hatch</h3>
+<p>This space is encrypted and private. Save anything non-academic here to keep your mind fresh.</p>
+<div id="locker-content-display" class="locker-content">
+</div>
+<button class="btn primary-btn add-item-btn" id="add-locker-item"><i class="fas fa-plus"></i> Add New Item</button>
+</div>
+</section>
+
+<section id="connect-view" class="view">
+<div class="connect-panel">
+<h3>Find Your Study Peers</h3>
+<p>Connect with other students based on your subject and level.</p>
+
+<div class="connect-filters">
+<label for="filter-subject">Filter by Subject:</label>
+<select id="filter-subject">
+<option value="All">All Subjects</option>
+<option value="Physics">Physics</option>
+<option value="Biology">Biology</option>
+<option value="History">History</option>
+<option value="Computer Science">Computer Science</option>
+<option value="Mathematics">Mathematics</option>
+</select>
+<button class="btn primary-btn" id="find-peers-btn">Find Peers</button>
+</div>
+
+<div class="peer-list" id="peer-list-display">
+</div>
+</div>
+</section>
+</main>
+</div>
+
+<div id="locker-modal" class="modal">
+<div class="modal-content">
+<span class="close-btn">&times;</span>
+<h3>Add Item to Locker</h3>
+<select id="item-type-select">
+<option value="quote">Motivational Quote</option>
+<option value="photo">Personal Photo (URL/Link)</option>
+</select>
+<textarea id="item-text-input" placeholder="Enter your quote or photo URL/link here..."></textarea>
+<button class="btn primary-btn" id="save-locker-item">Save Item</button>
+</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+

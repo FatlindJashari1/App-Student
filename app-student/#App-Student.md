@@ -1,0 +1,2 @@
+#App-Student
+We created this student app to help students organize their academic tasks and access information more easily. The app was designed with a user-friendly approach and practical functionality. It took around a few weeks to design and build.
